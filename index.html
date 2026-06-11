@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RawPaw — Roblox Builder & UI Designer</title>
+    <!-- Шрифты -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@600;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg: #050507;
+            --surface: #0f0f12;
+            --surface-hover: #15151a;
+            --border: #1e1e24;
+            --accent: #ff5533; 
+            --accent-gradient: linear-gradient(45deg, #ff5533, #ff2266, #ff8833, #ff5533);
+            --text: #949499;
+            --text-bright: #ffffff;
+            --font-main: 'Inter', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: var(--font-main);
+            font-size: 16px;
+            line-height: 1.7;
+            padding: 0 20px;
+            overflow-x: hidden;
+            transition: opacity 0.3s ease; /* Для эффекта перезагрузки */
+        }
+
+        a {
+            color: var(--text-bright);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        /* ЭФФЕКТ ПЛАВНОГО ПОЯВЛЕНИЯ БЛОКОВ */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .container {
+            max-width: 1050px;
+            margin: 0 auto;
+            border-left: 1px solid var(--border);
+            border-right: 1px solid var(--border);
+            padding: 0 60px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 50px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        /* ГИГАНТСКИЙ ЛОГОТИП С АНИМАЦИЕЙ ПЕРЕЛИВА */
+        .logo {
+            font-family: var(--font-mono);
+            font-weight: 800;
+            font-size: 36px; /* Большой размер */
+            letter-spacing: -1px;
+            background: var(--accent-gradient);
+            background-size: 300% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shine 5s linear infinite;
+        }
+
+        @keyframes shine {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 35px;
+        }
+
+        nav {
+            display: flex;
+            gap: 25px;
+        }
+
+        nav a {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text);
+        }
+
+        nav a:hover {
+            color: var(--text-bright);
+        }
+
+        .lang-btn {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--text-bright);
+            padding: 10px 18px;
+            cursor: pointer;
+            font-family: var(--font-mono);
+            font-size: 13px;
+            border-radius: 14px;
+            transition: all 0.3s;
+        }
+        .lang-btn:hover {
+            border-color: var(--accent);
+            box-shadow: 0 0 15px rgba(255, 85, 51, 0.2);
+        }
+
+        section {
+            padding: 110px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        h1, h2, h3 {
+            color: var(--text-bright);
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+
+        h1 { 
+            font-size: 56px;
+            line-height: 1.15; 
+            letter-spacing: -2px;
+        }
+        h2 { 
+            font-size: 28px; 
+            letter-spacing: -0.5px;
+            margin-bottom: 45px;
+            position: relative;
+        }
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, #ff5533, #ff2266);
+            border-radius: 2px;
+        }
+
+        .hero p {
+            font-size: 21px;
+            max-width: 800px;
+            margin-bottom: 45px;
+            color: #b0b0b8;
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff5533 0%, #ff2266 100%);
+            padding: 18px 45px;
+            color: var(--text-bright);
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 18px;
+            box-shadow: 0 4px 20px rgba(255, 85, 51, 0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 85, 51, 0.4);
+            filter: brightness(1.1);
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        /* КАРТОЧКИ С ЗАОКРУГЛЕНИЕМ И ТЕНЯМИ */
+        .card {
+            border: 1px solid var(--border);
+            padding: 40px;
+            background: var(--surface);
+            border-radius: 20px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card:hover {
+            border-color: rgba(255, 85, 51, 0.3);
+            background: var(--surface-hover);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(255, 85, 51, 0.05);
+        }
+
+        .stats-num {
+            font-family: var(--font-mono);
+            font-size: 52px;
+            color: var(--text-bright);
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #ff5533 0%, #ff2266 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .project-tags {
+            margin-top: 20px;
+            font-family: var(--font-mono);
+            font-size: 13px;
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        /* ТАБЛИЦА ЦЕН */
+        .price-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 14px;
+            font-size: 18px;
+        }
+
+        .price-table tr td {
+            padding: 25px 25px;
+            background: var(--surface);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+
+        .price-table tr td:first-child {
+            border-left: 1px solid var(--border);
+            border-top-left-radius: 18px;
+            border-bottom-left-radius: 18px;
+            font-weight: 600;
+        }
+
+        .price-table tr td:last-child {
+            border-right: 1px solid var(--border);
+            border-top-right-radius: 18px;
+            border-bottom-right-radius: 18px;
+        }
+
+        .price-table tr:hover td {
+            background: var(--surface-hover);
+            border-color: rgba(255, 85, 51, 0.2);
+            color: var(--text-bright);
+        }
+
+        /* КРАСИВЫЕ КНОПКИ ДЛЯ СОЦСЕТЕЙ */
+        .social-channels {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .social-link {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 25px;
+            background: #131317;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            font-family: var(--font-mono);
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .social-link.tg:hover {
+            border-color: #0088cc;
+            box-shadow: 0 0 20px rgba(0, 136, 204, 0.15);
+            background: #161a24;
+        }
+
+        .social-link.dc:hover {
+            border-color: #5865F2;
+            box-shadow: 0 0 20px rgba(88, 101, 242, 0.15);
+            background: #171825;
+        }
+
+        .social-link span {
+            color: var(--text);
+            font-weight: 400;
+            font-size: 16px;
+        }
+
+        .social-link:hover span {
+            color: var(--text-bright);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            color: var(--text-bright);
+        }
+
+        input, textarea, select {
+            width: 100%;
+            background: #0b0b0d;
+            border: 1px solid var(--border);
+            padding: 16px;
+            color: var(--text-bright);
+            font-family: var(--font-main);
+            font-size: 16px;
+            border-radius: 14px;
+            transition: all 0.3s;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        footer {
+            padding: 60px 0;
+            text-align: center;
+            font-size: 14px;
+            font-family: var(--font-mono);
+            border-top: 1px solid var(--border);
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 0 20px; border: none; }
+            .grid-2 { grid-template-columns: 1fr; gap: 20px; }
+            nav { display: none; }
+            h1 { font-size: 38px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- ШАПКА -->
+    <header>
+        <div class="logo">RAWPAW</div>
+        <div class="nav-right">
+            <nav>
+                <a href="#about" data-lang-ru="Обо мне" data-lang-en="About">About</a>
+                <a href="#work" data-lang-ru="Работы" data-lang-en="Work">Work</a>
+                <a href="#pricing" data-lang-ru="Цены" data-lang-en="Pricing">Pricing</a>
+                <a href="#contact" data-lang-ru="Контакты" data-lang-en="Contact">Contact</a>
+            </nav>
+            <button class="lang-btn" onclick="reloadWithNewLang()">EN / RU</button>
+        </div>
+    </header>
+
+    <!-- ГЛАВНЫЙ ЭКРАН -->
+    <section class="hero reveal">
+        <h1 id="hero-title" data-lang-ru="Строю миры.<br>Создаю интерфейсы." data-lang-en="Worlds built.<br>UI/UX crafted.">Worlds built.<br>UI/UX crafted.</h1>
+        <p id="hero-desc" data-lang-ru="RawPaw — Roblox Builder & UI Designer. Проектирую атмосферные 3D-миры любой сложности и создаю чистые, современные игровые интерфейсы с грамотной адаптацией под ПК и телефоны." data-lang-en="RawPaw — Roblox Builder & UI Designer. Crafting immersive 3D environments and clean, modern game interfaces fully responsive across PC and mobile platforms.">RawPaw — Roblox Builder & UI Designer. Crafting immersive 3D environments and clean, modern game interfaces fully responsive across PC and mobile platforms.</p>
+        <a href="#contact" class="btn" id="hero-btn" data-lang-ru="Начать проект" data-lang-en="Start a project">Start a project</a>
+    </section>
+
+    <!-- ПРОФИЛЬ -->
+    <section id="about" class="reveal">
+        <h2 data-lang-ru="Обо мне & Стек" data-lang-en="About & Stack">About & Stack</h2>
+        <div class="grid-2">
+            <!-- Блок со счётчиком (срабатывает при 100% видимости) -->
+            <div class="card" id="counter-trigger-zone">
+                <div class="stats-num" id="experience-counter">0</div>
+                <div data-lang-ru="года опыта в строительстве и разработке GUI." data-lang-en="years of experience in map building and GUI design.">years of experience in map building and GUI design.</div>
+            </div>
+            <div class="card">
+                <div class="stats-num">Expertise</div>
+                <div data-lang-ru="Roblox Studio, Map Layouts, UI/UX Design, Luau Logic." data-lang-en="Roblox Studio, Map Layouts, UI/UX Design, Luau Logic.">Roblox Studio, Map Layouts, UI/UX Design, Luau Logic.</div>
+            </div>
+        </div>
+        <div style="margin-top: 40px;">
+            <p data-lang-ru="В своих работах я совмещаю качественный билд и проработанный интерфейс. Карты создаются без лишнего мусора и лагов, с четким распределением геометрии и правильным освещением. Параллельно проектирую удобные UI-системы: они не плывут на мобильных устройствах, имеют приятный визуал и интуитивно понятную навигацию для игрока." data-lang-en="I combine high-quality map building with polished user interfaces. My worlds are clean, optimized, and lag-free, utilizing correct geometry and precise lightning settings. At the same time, I design rich UI systems: they never break on mobile devices, look clean, and ensure intuitive navigation for players.">I combine high-quality map building with polished user interfaces. My worlds are clean, optimized, and lag-free, utilizing correct geometry and precise lightning settings. At the same time, I design rich UI systems: they never break on mobile devices, look clean, and ensure intuitive navigation for players.</p>
+        </div>
+    </section>
+
+    <!-- РАБОТЫ -->
+    <section id="work" class="reveal">
+        <h2 data-lang-ru="Что я делаю" data-lang-en="Selected Work">Selected Work</h2>
+        
+        <div class="card" style="margin-bottom: 25px;">
+            <h3 data-lang-ru="Проектирование локаций и Блокаут" data-lang-en="Environment Design & Blockout">Environment Design & Blockout</h3>
+            <p data-lang-ru="Строительство детализированных миров: от пропсов до огромных бесшовных карт. Контроль полигонов, оптимизация мешей и настройка атмосферного освещения для полного погружения." data-lang-en="Handcrafting highly immersive worlds: from single map assets to massive seamless zones. Polygon control, mesh optimization, and advanced lighting settings.">Handcrafting highly immersive worlds: from single map assets to massive seamless zones. Polygon control, mesh optimization, and advanced lighting settings.</p>
+            <div class="project-tags">#MapDesign #RobloxStudio #Optimization</div>
+        </div>
+
+        <div class="card">
+            <h3 data-lang-ru="Разработка игровых интерфейсов (UI/UX)" data-lang-en="Game Interfaces & UI/UX">Game Interfaces & UI/UX</h3>
+            <p data-lang-ru="Создание современных игровых менюшек, HUD, инвентарей и магазинов. Делаю интерфейс аккуратным и понятным. Настраиваю идеальное масштабирование под любые экраны, добавляю плавные анимации появления окон." data-lang-en="Creating modern game menus, HUDs, inventories, and shop layouts. Making layouts clean and highly responsive across all screen layouts, complete with smooth UI transitions.">Creating modern game menus, HUDs, inventories, and shop layouts. Making layouts clean and highly responsive across all screen layouts, complete with smooth UI transitions.</p>
+            <div class="project-tags">#UI-Design #UX #ResponsiveLayout</div>
+        </div>
+    </section>
+
+    <!-- ЦЕНЫ -->
+    <section id="pricing" class="reveal">
+        <h2 data-lang-ru="Стоимость" data-lang-en="Pricing">Pricing</h2>
+        <p style="margin-bottom: 30px;" data-lang-ru="Прайс зависит от общего объема и проработки проекта." data-lang-en="Pricing scales with layout size and detail level.">Pricing scales with layout size and detail level.</p>
+        <table class="price-table">
+            <tr>
+                <td data-lang-ru="Разработка интерфейсов (UI)" data-lang-en="UI Design / GUI Layouts">UI Design / GUI Layouts</td>
+                <td data-lang-ru="Дизайн пака окон, игрового HUD и настройка адаптивности" data-lang-en="Menu design packages, functional player HUDs, and scaling">Menu design packages, functional player HUDs, and scaling</td>
+                <td style="color:var(--text-bright); text-align:right; font-weight:700;" data-lang-ru="от $15" data-lang-en="from $15">from $15</td>
+            </tr>
+            <tr>
+                <td data-lang-ru="Карта / Локация" data-lang-en="Map Build / Environment">Map Build / Environment</td>
+                <td data-lang-ru="Сборка атмосферного лобби, арены или полноценной локации" data-lang-en="Atmospheric lobby design, combat arenas, or themed locations">Atmospheric lobby design, combat arenas, or themed locations</td>
+                <td style="color:var(--text-bright); text-align:right; font-weight:700;" data-lang-ru="от $150" data-lang-en="from $150">from $150</td>
+            </tr>
+        </table>
+    </section>
+
+    <!-- КОНТАКТЫ -->
+    <section id="contact" class="reveal">
+        <h2 data-lang-ru="Контакты" data-lang-en="Contact">Contact</h2>
+        <div class="grid-2">
+            <div>
+                <p data-lang-ru="Нужно собрать красивую карту или сверстать удобное меню? Пиши напрямую или заполни форму справа — обсудим детали." data-lang-en="Need an optimized map or a high-quality interface pack? Contact me via social channels or use the fast form.">Need an optimized map or a high-quality interface pack? Contact me via social channels or use the fast form.</p>
+                
+                <!-- ОБНОВЛЕННЫЕ КРАСИВЫЕ КНОПКИ СОЦСЕТЕЙ -->
+                <div class="social-channels">
+                    <a href="https://t.me/Wikingrere" target="_blank" class="social-link tg">
+                        Telegram <span>@Wikingrere →</span>
+                    </a>
+                    <a href="#" onclick="navigator.clipboard.writeText('rawpawqw'); alert('Discord ID copied!'); return false;" class="social-link dc">
+                        Discord <span>@rawpawqw (copy)</span>
+                    </a>
+                </div>
+            </div>
+            <div class="card">
+                <form onsubmit="event.preventDefault(); alert('Done!');">
+                    <div class="form-group">
+                        <label data-lang-ru="Ваше имя" data-lang-en="Name">Name</label>
+                        <input type="text" required>
+                    </div>
+                    <div class="form-group">
+                        <label data-lang-ru="Что нужно сделать?" data-lang-en="Project Focus">Project Focus</label>
+                        <select>
+                            <option>Roblox Building / Карта</option>
+                            <option>UI/UX Design / Интерфейсы</option>
+                            <option>Комплексный проект (Карта + UI)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label data-lang-ru="Описание задачи" data-lang-en="Message">Message</label>
+                        <textarea rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="btn" style="width:100%;" data-lang-ru="Связаться" data-lang-en="Send Message">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ПОДВАЛ -->
+    <footer>
+        © 2022 — 2026 · RawPaw · Precision & Aesthetics.
+    </footer>
+
+</div>
+
+<script>
+    // Инициализация языка из локального хранилища (чтобы выбор сохранялся при перезагрузке)
+    let currentLang = localStorage.getItem('siteLang') || 'en';
+    applyLanguage(currentLang);
+
+    // 1. ПЛАВНОЕ ПОЯВЛЕНИЕ БЛОКОВ
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
+        });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.reveal').forEach((el) => revealObserver.observe(el));
+
+    // 2. СЧЕТЧИК, КОТОРЫЙ СРАБАТЫВАЕТ СТРОГО ПРИ 100% ПОДЛЕТЕ В ЭКРАН
+    let counterAnimated = false;
+    const counterObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting && !counterAnimated) {
+                animateCounter('experience-counter', 4);
+            }
+        });
+    }, { threshold: 1.0 }); // 1.0 означает — карточка должна быть видна ПОЛНОСТЬЮ
+
+    counterObserver.observe(document.getElementById('counter-trigger-zone'));
+
+    function animateCounter(id, targetValue) {
+        counterAnimated = true;
+        const counterEl = document.getElementById(id);
+        let startValue = 0;
+        const duration = 1000; 
+        const stepTime = Math.abs(Math.floor(duration / targetValue));
+        
+        const timer = setInterval(() => {
+            startValue++;
+            counterEl.innerHTML = startValue + "+";
+            if (startValue >= targetValue) {
+                clearInterval(timer);
+            }
+        }, stepTime);
+    }
+
+    // 3. ПЕРЕЗАГРУЗКА СТРАНИЦЫ С ДРУГИМ ЯЗЫКОМ
+    function reloadWithNewLang() {
+        const nextLang = currentLang === 'en' ? 'ru' : 'en';
+        localStorage.setItem('siteLang', nextLang); // Сохраняем выбор
+        
+        // Красивый визуальный эффект ухода в затемнение перед жестким рефрешем
+        document.body.style.opacity = '0';
+        
+        setTimeout(() => {
+            window.location.reload(); // Перезагрузка страницы
+        }, 300);
+    }
+
+    function applyLanguage(lang) {
+        document.querySelectorAll('[data-lang-ru]').forEach(element => {
+            if (lang === 'ru') {
+                element.innerHTML = element.getAttribute('data-lang-ru');
+            } else {
+                element.innerHTML = element.getAttribute('data-lang-en');
+            }
+        });
+    }
+</script>
+
+</body>
+</html>
