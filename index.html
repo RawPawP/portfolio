@@ -544,14 +544,14 @@
             background: #0b0b0d;
         }
 
-        .work-image-container img {
+        .work-image-container img, .work-image-container video {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .work-item:hover .work-image-container img {
+        .work-item:hover .work-image-container img, .work-item:hover .work-image-container video {
             transform: scale(1.04);
         }
 
@@ -932,7 +932,7 @@
                     </div>
                     <div class="panel-group">
                         <label class="panel-label" data-lang-ru="Язык:" data-lang-en="Lang:" data-lang-es="Idioma:" data-lang-ar="اللغة:" data-lang-zh="语言:">Lang:</label>
-                        <!-- КРАСИВАЯ СОВРЕМЕННАЯ ПАНЕЛЬКА ПЕРЕКЛЮЧЕНИЯ -->
+                        <!-- ПАНЕЛЬКА ПЕРЕКЛЮЧЕНИЯ -->
                         <div class="lang-switcher-box">
                             <button class="lang-btn" onclick="selectLang('en')">EN</button>
                             <button class="lang-btn" onclick="selectLang('ru')">RU</button>
@@ -967,7 +967,7 @@
     </section>
 
     <section id="about" class="reveal">
-        <h2 data-lang-ru="Обо мне & Стек" data-lang-en="About & Stack" data-lang-es="Sobre mí y Stack" data-lang-ar="من أنا والتقنيات" data-lang-zh="关于我 & 技术栈">About & Stack</h2>
+        <h2 data-lang-ru="Обо мне & Стек" data-lang-en="About & Stack" data-lang-es="Sobre mí y Stack" data-lang-ar="من أنا والتقниат" data-lang-zh="关于我 & 技术栈">About & Stack</h2>
         <div class="grid-2">
             <div class="card" id="counter-trigger-zone">
                 <div class="stats-num" id="experience-counter">0</div>
@@ -982,7 +982,7 @@
             <p data-lang-ru="В своих работах я совмещаю качественный билд и проработанный интерфейс. Карты создаются без лишнего мусора и лагов, с чётким распределением геометрии и правильным освещением. Параллельно проектирую удобные UI-системы: они не плывут на мобильных устройствах, имеют приятный визуал и интуитивно понятную навигацию для игрока." 
                data-lang-en="I combine high-quality map building with polished user interfaces. My worlds are clean, optimized, and lag-free, utilizing correct geometry and precise lightning settings. At the same time, I design rich UI systems: they never break on mobile devices, look clean, and ensure intuitive navigation for players." 
                data-lang-es="Combino la construcción de mapas de alta calidad con interfaces de usuario pulidas. Mis mundos son limpios, optimizados y sin lag, utilizando una geometría correcta y ajustes de iluminación precisos. Al mismo tiempo, diseño sistemas de UI adaptables: nunca se rompen en dispositivos móviles, lucen limpios y garantizan una navegación intuitiva." 
-               data-lang-ar="أجمع بين البناء عالي الجودة لخرائط الألعاب وواجهات المستخدم المصقولة. العوالم التي أصممها نظيفة، محسنة، وخالية من اللاغ، باستخدام هندسة دقيقة وإعدادات إضاءة احترافية. في نفس الوقت، أصمم أنظمة واجهات متجاوبة: لا تتشوه على الجوالات، ذات مظهر جذاب وتضمن تنقلاً سهلاً للاعبين." 
+               data-lang-ar="أجمع بين البناء عالي الجودة لخرائط الألعاب وواجهات المستخدم المصقولة. العوالم التي أصممها نظيفة، محسنة، وخالية من اللاغ، باستخدام هندسة دقيقة وإعدادات إضاءة احترافية. في نفس الوقت، أصمم أنظمة واجهات متجاوبة: لا تتشوه на الجوالات، ذات مظهر جذاب وتضمن تنقلاً سهلاً للاعبين." 
                data-lang-zh="我将高质量的地搭建与精致的用户界面相结合。我打造的世界干净、优化且无卡顿，拥有严谨的几何结构和精准的灯光设置。与此同时，我设计的 UI 系统具备极佳的响应性：在移动端绝不崩坏，视觉风格高级，并能确保玩家获得直观的导航体验。">I combine high-quality map building with polished user interfaces. My worlds are clean, optimized, and lag-free, utilizing correct geometry and precise lightning settings. At the same time, I design rich UI systems: they never break on mobile devices, look clean, and ensure intuitive navigation for players.</p>
         </div>
     </section>
@@ -991,6 +991,7 @@
         <h2 data-lang-ru="Примеры работ" data-lang-en="Selected Work" data-lang-es="Trabajos Seleccionados" data-lang-ar="أعمال مختارة" data-lang-zh="精选作品">Selected Work</h2>
         
         <div class="work-gallery">
+            <!-- Работа 1 -->
             <div class="work-item">
                 <div class="work-image-container">
                     <img src="image_10b479.jpg" alt="Roblox Neon Environment Subspace">
@@ -1002,23 +1003,37 @@
                 </div>
             </div>
 
+            <!-- Новая Работа 2 (Видео: Ночной Переулок) -->
             <div class="work-item">
                 <div class="work-image-container">
-                    <img src="image_10b495.png" alt="Warehouse Internal Asset Mapping">
+                    <video src="video_alley.mp4" autoplay loop muted playsinline></video>
                 </div>
                 <div class="work-info">
-                    <h3 data-lang-ru="Индустриальные интерьеры & Складские комплексы" data-lang-en="Industrial Interiors & Warehouse Layouts" data-lang-es="Interiores Industriales y Diseños de Almacenes" data-lang-ar="التصاميم الداخلية الصناعية ومخططات المستودعات" data-lang-zh="工业室内设计 & 仓库布局">Industrial Interiors & Warehouse Layouts</h3>
-                    <p data-lang-ru="Оптимизированное размещение пропсов, работа с геометрией стеллажей и коробок." data-lang-en="Optimized prop placement, detailed structural design for storage racks and box layouts." data-lang-es="Colocación optimizada de accesorios, diseño estructural detallado para estanterías de almacenamiento." data-lang-ar="توزيع أصول محسّن، تصميم هيكلي مفصل لرفوف التخزين ومخططات الصناديق." data-lang-zh="优化的道具摆放，货架和箱体布局的详细结构设计。"></p>
-                    <div class="project-tags">#InteriorDesign #Blockout #OptimizedMeshes</div>
+                    <h3 data-lang-ru="Ночные городские кварталы & Кинематографичный эмбиент" data-lang-en="Night Alleyways & Cinematic City Blocks" data-lang-es="Callejones Nocturnos y Bloques de Ciudad Cinemáticos" data-lang-ar="شوارع المدينة الليلية والأجواء السينمائية" data-lang-zh="深夜小巷 & 电影感城市街区">Night Alleyways & Cinematic City Blocks</h3>
+                    <p data-lang-ru="Создание мрачной урбанистической атмосферы. Кастомная кирпичная кладка, заборы, проработка задних планов и мягкое неоновое свечение из окон глубокой ночью." data-lang-en="Designing tense, dark urban surroundings. Custom brick setups, chain-link fences, and realistic midnight ambient glow from distant skyscrapers." data-lang-es="Diseño de entornos urbanos oscuros y tensos. Configuración de ladrillos personalizados, vallas y resplandor nocturno realista." data-lang-ar="تصميم محيط حضري مظلم وغامض. جدران طوب مخصصة، أسلاك شائكة، وتوهج ليلي واقعي من النوافذ البعيدة." data-lang-zh="打造暗黑压抑的城市角落。自定义砖墙纹理、网格铁絲網，以及深夜高楼窗户投射出的微弱流光。"></p>
+                    <div class="project-tags">#UrbanStyle #MidnightVibe #LevelDesign</div>
                 </div>
             </div>
 
+            <!-- Новая Работа 3 (Видео: Хоррор-Маркет) -->
+            <div class="work-item">
+                <div class="work-image-container">
+                    <video src="video_store.mp4" autoplay loop muted playsinline></video>
+                </div>
+                <div class="work-info">
+                    <h3 data-lang-ru="Хоррор-интерьеры & Локация заброшенного маркета" data-lang-en="Abandoned Grocery Store & Horror Layouts" data-lang-es="Supermercado Abandonado y Diseños de Terror" data-lang-ar="متجر البقالة المهجور وتخطيطات الرعب" data-lang-zh="废弃超市 & 恐怖解密室内设计">Abandoned Grocery Store & Horror Layouts</h3>
+                    <p data-lang-ru="Полноценный хоррор-сеттинг: детализированные торговые стеллажи, кассовая зона и акцентная, пугающая игра света и глубоких теней для нагнетания саспенса." data-lang-en="Full horror game environment optimization. Stylized product shelves, counter systems, and contrast shadow focus built for intense narrative sequences." data-lang-es="Optimización completa de entornos de terror. Estanterías estilizadas, sistemas de cajas и enfoque de sombras contrastantes." data-lang-ar="بيئة رعب متكاملة ومحسنة. رفوف منتجات منسقة، أنظمة كاشير، وتركيز على الظلال المتباينة لصناعة لقطات مشدودة." data-lang-zh="沉浸式恐怖游戏情境搭建。包含高度复原的商品货架、收银台模块，通过强对比的冷调灯光与浓重阴影塑造绝佳的惊悚氛围。"></p>
+                    <div class="project-tags">#HorrorInterior #Supermarket #ContrastLighting</div>
+                </div>
+            </div>
+
+            <!-- Работа 4 -->
             <div class="work-item">
                 <div class="work-image-container">
                     <img src="image_10b49a.jpg" alt="Horror Retro Room Atmosphere">
                 </div>
                 <div class="work-info">
-                    <h3 data-lang-ru="Хоррор локации & Глубокая работа со светом" data-lang-en="Horror Environments & Volumetric Lighting" data-lang-es="Entornos de Terror e Iluminación Volumétrica" data-lang-ar="بيئات الرعب والإضاءة الحجمية" data-lang-zh="恐怖场景 & 体积 shadow 灯光">Horror Environments & Volumetric Lighting</h3>
+                    <h3 data-lang-ru="Ретро Хоррор локации & Глубокая работа со светом" data-lang-en="Horror Environments & Volumetric Lighting" data-lang-es="Entornos de Terror e Iluminación Volumétrica" data-lang-ar="بيئات الرعب والإضاءة الحجمية" data-lang-zh="恐怖场景 & 体积 shadow 灯光">Horror Environments & Volumetric Lighting</h3>
                     <p data-lang-ru="Создание напряженной хоррор-атмосферы. Кастомный конусный свет фонарика, проработка мелких деталей интерьера." data-lang-en="Crafting tense, eerie horror setups. Custom flashlight cone beam tracking, vintage prop placement." data-lang-es="Creación de entornos de terror tensos y misteriosos. Seguimiento personalizado del haz del linterna." data-lang-ar="صناعة أجواء رعب مشدودة وغامضة. تتبع شعاع المصباح اليدوي المخصص وتوزيع الأثاث الكلاسيكي." data-lang-zh="构建紧张、怪异的恐怖场景。自定义手电筒锥形光束追踪，复古道具摆放。"></p>
                     <div class="project-tags">#HorrorVibe #FlashlightLighting #AssetDressing</div>
                 </div>
@@ -1033,7 +1048,7 @@
             <div class="price-card">
                 <div>
                     <div class="price-card-title" data-lang-ru="Обычная локация" data-lang-en="Basic Environment" data-lang-es="Entorno Básico" data-lang-ar="بيئة أساسية" data-lang-zh="基础场景">Basic Environment</div>
-                    <div class="price-card-desc" data-lang-ru="Сборка небольшого лобби, компактной арены, стартовой зоны или аккуратного пака игровых UI-интерфейсов." data-lang-en="Atmospheric small lobby, combat arenas, minor asset configs, or custom adaptive user interface packs." data-lang-es="Lobby pequeño atmosférico, arenas de combate, configuraciones menores de assets o packs de UI adaptables." data-lang-ar="ردهة صغيرة ممتعة، ساحات قتال، تكوينات أصول بسيطة، أو حزم واجهات مستخدم متجاوبة مخصصة." data-lang-zh="包含氛围感小型大厅、战斗竞技场、次要资产配置或自定义自适应用户界面包。">Atmospheric small lobby, combat arenas, minor asset configs, or custom adaptive user interface packs.</div>
+                    <div class="price-card-desc" data-lang-ru="Сборка небольшого лобби, компактной арены, стартовой зоны или аккуратного пака игровых UI-интерфейсов." data-lang-en="Atmospheric small lobby, combat arenas, minor asset configs, or custom adaptive user interface packs." data-lang-es="Lobby pequeño atmosférico, arenas de combate, configuraciones menores de assets o packs de UI adaptables." data-lang-ar="ردهة صغيرة ممتعة، ساحات قتال، تكوينات أصول بسيطة، أو حزم واجهات مستخدم متجاوبة مخصصة." data-lang-zh="包含氛围感小型大厅、战斗竞技场、次要资产配置 or 自定义自适应用户界面包。">Atmospheric small lobby, combat arenas, minor asset configs, or custom adaptive user interface packs.</div>
                 </div>
                 <div class="price-card-bottom">
                     <div class="price-card-amount" data-lang-ru="от $150" data-lang-en="from $150" data-lang-es="desde $150" data-lang-ar="من $150" data-lang-zh="150 美元起">from $150</div>
@@ -1173,7 +1188,7 @@
         { id: 6, ru: "Abstract Waves (Волны)", en: "Abstract Waves", es: "Ondas Abstractas", ar: "موجات مجردة", zh: "抽象线条 (流体波动)" },
         { id: 7, ru: "Starfall Rain (Звезды)", en: "Starfall Rain", es: "Lluvia de Estrellas", ar: "مطر الشهب", zh: "流星暴雨 (全屏下落)" },
         { id: 8, ru: "Aurora (Сияние)", en: "Aurora Lights", es: "Auroral", ar: "أضواء الشفق القطبي", zh: "极光绽放 (炫彩霓虹)" },
-        { id: 9, ru: "Glitch (Помехи)", en: "Glitch Static", es: "Glitch Estático", ar: "تشويش رقمي", zh: "故障艺术 (复古静电)" },
+        { id: 9, ru: "Glitch (Помехи)", en: "Glitch Static", es: "Glitch Estático", ar: "تشويش رقمи", zh: "故障艺术 (复古静电)" },
         { id: 10, ru: "Fluid Lava (Лава)", en: "Fluid Lava (Neon)", es: "Lava Fluida", ar: "الحمم السائلة", zh: "赛博岩浆 (流体发光)" },
         { id: 11, ru: "Hexagon Net (Соты)", en: "Hexagon Net", es: "Red Hexagonal", ar: "شبكة سداسية", zh: "蜂巢晶格 (科技六边形)" },
         { id: 12, ru: "ASCII Flow (ASCII)", en: "ASCII Flow", es: "Flujo ASCII", ar: "تدفق آスキー", zh: "ASCII 字符流" },
@@ -1209,7 +1224,6 @@
         bgModes.forEach(mode => {
             const option = document.createElement('option');
             option.value = mode.id;
-            // Динамический выбор перевода для названий фонов
             option.text = mode[currentLang] || mode.en;
             option.selected = (mode.id === currentBgId);
             selector.add(option);
@@ -1437,26 +1451,21 @@
     counterObserver.observe(document.getElementById('counter-trigger-zone'));
     function animateCounter(id, targetValue) { counterAnimated = true; const counterEl = document.getElementById(id); let startValue = 0; const duration = 1000; const stepTime = Math.abs(Math.floor(duration / targetValue)); const timer = setInterval(() => { startValue++; counterEl.innerHTML = startValue + "+"; if (startValue >= targetValue) clearInterval(timer); }, stepTime); }
 
-    // ОБНОВЛЕННАЯ СИСТЕМА ПЕРЕКЛЮЧЕНИЯ ЯЗЫКОВ
     function selectLang(lang) {
         currentLang = lang;
         localStorage.setItem('siteLang', lang);
-        
-        // Переключение анимации плавного угасания контента
         document.body.style.opacity = '0';
         
         setTimeout(() => {
             applyLanguage(lang);
             fillSelector();
             
-            // Обработка направления текста RTL для арабского
             if (lang === 'ar') {
                 document.body.classList.add('rtl');
             } else {
                 document.body.classList.remove('rtl');
             }
             
-            // Подсветка активной кнопки
             document.querySelectorAll('.lang-btn').forEach(btn => {
                 btn.classList.remove('active');
                 if(btn.getAttribute('onclick').includes(`'${lang}'`)) {
@@ -1471,12 +1480,11 @@
     function applyLanguage(lang) { 
         document.querySelectorAll('[data-lang-ru]').forEach(element => { 
             let translation = element.getAttribute(`data-lang-${lang}`);
-            if (!translation) translation = element.getAttribute('data-lang-en'); // Фолбек на английский
+            if (!translation) translation = element.getAttribute('data-lang-en'); 
             element.innerHTML = translation; 
         }); 
     }
 
-    // Инициализация интерфейса при первой загрузке
     applyLanguage(currentLang);
     if(currentLang === 'ar') document.body.classList.add('rtl');
 
@@ -1487,7 +1495,6 @@
         initTiltEffect(); 
         drawLoop(); 
         
-        // Установка активного класса кнопке при загрузке
         document.querySelectorAll('.lang-btn').forEach(btn => {
             if(btn.getAttribute('onclick').includes(`'${currentLang}'`)) {
                 btn.classList.add('active');
